@@ -9,21 +9,15 @@ def strip(s):
     return s
 
 def sentence_is_correct(original, translation):
+    prompt = "Say YES if \"" + translation + "\" is a correct translation of \"" + original + "\" into German. If the translation is wrong, explain why.\nAnswer:"
     response = openai.Completion.create(
       model="text-davinci-003",
-      prompt="Say YES if the following German sentence is a grammatically correct translation: \nOriginal sentence:" + original + "\n\nTranslation:" + translation + "\n\nAnswer: ",
-      temperature=0
+      prompt=prompt,
+      temperature=0.3,
+      max_tokens=100
     )
-    return "YES" in strip(response.choices[0].text).upper()
-
-def why_incorrect(s):
-    response = openai.Completion.create(
-      model="text-davinci-003",
-      prompt="Describe why the following German sentence is incorrect:" + s,
-      temperature=0,
-      max_tokens=100,
-    )
-    return strip(response.choices[0].text)
+    answer = response.choices[0].text
+    return answer
 
 def generate_exercise(skills):
     response = openai.Completion.create(
@@ -49,10 +43,11 @@ def one_exercise(skills):
     print("Translate the following sentence into German:")
     print(sentence)
     translation = input("> ")
-    if sentence_is_correct(sentence, translation):
+    is_correct = sentence_is_correct(sentence, translation)
+    if "yes" in is_correct.upper():
         print("Sentence correctly translated. Generating another one.")
     else:
-        print("Your sentence was incorrect. " + why_incorrect(translation))
+        print(is_correct)
     skills = adjust_skills(skills, translation)
     return skills
 
