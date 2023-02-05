@@ -1,10 +1,10 @@
 import openai
 from utils import strip, merge_evaluations, has_decreases
 
-def generate_generic_exercise():
+def generate_generic_exercise(difficulty):
     response = openai.Completion.create(
       model="text-davinci-003",
-      prompt="Generate a simple English sentence, that the user can translate into German for grammar practice.",
+      prompt="Generate an English sentence, that the user can translate into German for grammar practice. It's difficulty should be " + str(difficulty) + "/100.",
       temperature=0.6,
       max_tokens=40)
     return strip(response.choices[0].text)

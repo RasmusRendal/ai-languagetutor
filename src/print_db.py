@@ -5,6 +5,7 @@ if __name__ == "__main__":
     with open("./save.bin", "rb") as f:
         system = pickle.load(f)
     print("System iteration: " + str(system.iteration))
+    print("Generator difficulty: " + str(system.corrects))
     print("Schedule:")
     for k in system.schedule.keys():
         if k <= system.iteration:

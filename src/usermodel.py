@@ -28,6 +28,7 @@ class System:
         self.iteration = 1
         self.schedule = {}
         self.languagetool = False
+        self.corrects = 0
 
 
     def add_to_schedule(self, obj):
@@ -35,6 +36,14 @@ class System:
         while new_index in self.schedule:
             new_index += 1
         self.schedule[new_index] = obj
+
+    def correct(self, c):
+        if c:
+            self.corrects *= 2
+        else:
+            self.corrects -= 1
+            if self.corrects < 1:
+                self.corrects = 1
 
 
     def do_iteration(self):
@@ -48,20 +57,24 @@ class System:
             if answer_to_bool(is_correct):
                 print("Sentence correctly translated! Good job!")
                 obj.goodness *= 2
+                self.correct(True)
             else:
                 print(is_correct)
                 obj.goodness = 2
+                self.correct(False)
             self.add_to_schedule(obj)
         else:
-            sentence = generate_generic_exercise()
+            sentence = generate_generic_exercise(self.corrects)
             print("Translate the following sentence into German:")
             print(sentence)
             translation = input("> ")
             is_correct = sentence_is_correct(sentence, translation, languagetool=self.languagetool)
             if answer_to_bool(is_correct):
                 print("Sentence correctly translated! Good Job!")
+                self.correct(True)
             else:
                 print(is_correct)
+                self.correct(False)
                 self.add_to_schedule(MistakenSentence(sentence, translation))
         self.iteration += 1
 
