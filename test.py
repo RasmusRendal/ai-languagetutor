@@ -8,10 +8,10 @@ def strip(s):
         s = s[:-1]
     return s
 
-def sentence_is_correct(s):
+def sentence_is_correct(original, translation):
     response = openai.Completion.create(
       model="text-davinci-003",
-      prompt="Say YES if the following German sentence is grammatically correct: " + s,
+      prompt="Say YES if the following German sentence is a grammatically correct translation: \nOriginal sentence:" + original + "\n\nTranslation:" + translation + "\n\nAnswer: ",
       temperature=0
     )
     return "YES" in strip(response.choices[0].text).upper()
@@ -49,7 +49,7 @@ def one_exercise(skills):
     print("Translate the following sentence into German:")
     print(sentence)
     translation = input("> ")
-    if sentence_is_correct(translation):
+    if sentence_is_correct(sentence, translation):
         print("Sentence correctly translated. Generating another one.")
     else:
         print("Your sentence was incorrect. " + why_incorrect(translation))
