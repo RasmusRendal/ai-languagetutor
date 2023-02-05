@@ -9,9 +9,9 @@
     outputs = { self, flake-utils, nixpkgs }:
     flake-utils.lib.eachDefaultSystem (system:
     let
-        python = "python39";
+        python = "python310";
         pkgs = import nixpkgs { inherit system; };
-        mPython = pkgs.python38.withPackages (ps: with ps; [ openai ]);
+        mPython = pkgs.${python}.withPackages (ps: with ps; [ openai ]);
     in
     {
         defaultPackage = pkgs.stdenv.mkDerivation {
