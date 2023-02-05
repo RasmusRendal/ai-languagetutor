@@ -39,28 +39,24 @@ CONJUNCTIONS=5
 INTERJECTIONS=5
 
 Translate the following sentence into German:
-The teacher asked the students to write an essay about their summer vacation.
-> Die Lehrer bete die Studenten um einen Essay zu schreiben über ihres Sommerurlaub
- No, the translation is wrong. The correct translation is "Der Lehrer bat die Studenten, einen Aufsatz über ihren Sommerurlaub zu schreiben."
+The teacher gave the students a difficult test.
+> Der Lehrer gab die Studenten eine schwere Prüfung
+Sentence correctly translated. Generating another one.
 
-ARTICLE_USE changed from 5 to 3
-VERB_CONJUGATION changed from 5 to 3
-WORD_ORDER changed from 5 to 3
-PUNCTUATION changed from 5 to 4
-SPELLING changed from 5 to 4
-CAPITALIZATION changed from 5 to 4
-TENSES changed from 5 to 3
-PREPOSITIONS changed from 5 to 4
-SUBJECT_VERB_AGREEMENT changed from 5 to 3
-DIRECT_OBJECT changed from 5 to 3
-INDIRECT_OBJECT changed from 5 to 3
-INFINITIVES changed from 5 to 3
-GERUNDS changed from 5 to 3
-NOMINATIVE_CASE changed from 5 to 3
-ACCUSATIVE_CASE changed from 5 to 3
-DATIVE_CASE changed from 5 to 3
-GENITIVE_CASE changed from 5 to 3
+ARTICLE_USE changed from 5 to 1
+VERB_CONJUGATION changed from 5 to 1
+WORD_ORDER changed from 5 to 1
+PUNCTUATION changed from 5 to 1
+SPELLING changed from 5 to 1
 
 Translate the following sentence into German:
-The boy is playing with his toys.
+"The students should have written the exam yesterday."
+> Die Studenten sollen die Exam gestern geschreiben hat
+ No, the translation is wrong. The correct translation is "Die Studenten sollten gestern die Prüfung schreiben."
+
+ARTICLE_USE changed from 4 to 5
+VERB_CONJUGATION changed from 4 to 5
+WORD_ORDER changed from 4 to 5
+PUNCTUATION changed from 2 to 5
+SPELLING changed from 3 to 5
 ```

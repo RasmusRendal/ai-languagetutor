@@ -24,7 +24,7 @@ def generate_exercise(skills):
 def adjust_skills(skills, sentence):
     response = openai.Completion.create(
       model="text-davinci-003",
-      prompt="This is the evaluation of a German learner's grammar abillities, from a scale from 1 to 5, 1 being best and 5 being worst. Print new scores for 3 of these categories.\nBegin evaluation: " + skills + "\nBegin sentence:\n" + sentence + "\nBegin changed scores:\n",
+      prompt="This is the evaluation of a German learner's grammar abillities, from a scale from 1 to 5, 1 being best and 5 being worst. Print new scores for 3 of these categories, based on a sentence the user has written. The scores should get worse if a user made a relevant mistake, and better if the user used the grammar correctly.\nBegin evaluation: " + skills + "\nBegin sentence:\n" + sentence + "\nBegin changed scores:\n",
       max_tokens=40,
       temperature=0.3
     )
