@@ -62,6 +62,9 @@ SPELLING changed from 3 to 5
 ```
 
 ## Current state
-`davinci` is naturally not always completely correct about grammar.
+`davinci-003` is naturally not always completely correct about grammar.
 There's bound to be false positives and false negatives.
 Additionally, when adjusting its evaluation of the users abilities, it is way to overeager.
+
+Additionally, `davinci-003` probably shouldn't be used for everything.
+Ideally there should be some sort of test suite, wherein I can experiment with which models to use, and which temperature to run them at.
