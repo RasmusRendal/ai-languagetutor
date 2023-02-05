@@ -1,18 +1,15 @@
 #!/usr/bin/env python
-from prompts import *
+from usermodel import System
+import pickle
 
 if __name__ == "__main__":
     from os.path import exists
-    skills = ""
-    if exists("./skills.txt"):
-        skills = open("./skills.txt", "r").read()
-    else:
-        skills = open("./skills_template.txt", "r").read()
-
-    print("Initial evaluation:")
-    print(skills)
-    while "5" in skills or "4" in skills or "3" in skills or "2" in skills:
-        skills = one_exercise(skills)
-        with open("./skills.txt", "w") as f:
-            f.write(skills)
+    system = System()
+    if exists("./save.bin"):
+        with open("./save.bin", "rb") as f:
+            system = pickle.load(f)
+    while True:
+        system.do_iteration()
+        with open("./save.bin", "wb") as f:
+            pickle.dump(system, f)
 
