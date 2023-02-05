@@ -68,3 +68,6 @@ Additionally, when adjusting its evaluation of the users abilities, it is way to
 
 Additionally, `davinci-003` probably shouldn't be used for everything.
 Ideally there should be some sort of test suite, wherein I can experiment with which models to use, and which temperature to run them at.
+
+The prompts are also way too large. Each request costs about 448 tokens for transfering the evaluation. Instead, something clever should be done where the client knows what parts of grammar the user is having trouble with, and do some sort of spaced repetition about it.
+Using the AI to adjust the user evaluation really doesn't work in general anyway.
