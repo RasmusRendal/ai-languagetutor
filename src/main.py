@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from prompts import *
 
-
 if __name__ == "__main__":
     from os.path import exists
     skills = ""

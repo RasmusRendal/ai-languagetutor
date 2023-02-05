@@ -1,7 +1,7 @@
 def strip(s):
-    while s[0] == "\n":
+    while s[0] in ["\n", " "]:
         s = s[1:]
-    while s[-1] == "\n":
+    while s[-1] in ["\n", " "]:
         s = s[:-1]
     return s
 

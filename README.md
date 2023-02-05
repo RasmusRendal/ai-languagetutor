@@ -3,7 +3,7 @@ Built on OpenAI, this program prompts you to translate sentences into German, co
 As it stands, this is merely a POC.
 
 ## Usage:
-To use it, you need an API key from [OpenAI](https://platform.openai.com/).
+To use it, you need an API key from [OpenAI](https://platform.openai.com/) (A free account gets you 18$ worth of content, which lets you run this program for a long time).
 Set the environment variable `OPENAI_API_KEY` to your key, and run `./src/main.py`.
 You should get something like the following interaction:
 ```
@@ -60,3 +60,8 @@ WORD_ORDER changed from 4 to 5
 PUNCTUATION changed from 2 to 5
 SPELLING changed from 3 to 5
 ```
+
+## Current state
+`davinci` is naturally not always completely correct about grammar.
+There's bound to be false positives and false negatives.
+Additionally, when adjusting its evaluation of the users abilities, it is way to overeager.
