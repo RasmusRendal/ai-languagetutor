@@ -1,12 +1,5 @@
-#!/usr/bin/env python
 import openai
-
-def strip(s):
-    while s[0] == "\n":
-        s = s[1:]
-    while s[-1] == "\n":
-        s = s[:-1]
-    return s
+from utils import strip, merge_evaluations
 
 def sentence_is_correct(original, translation):
     prompt = "Say YES if \"" + translation + "\" is a correct translation of \"" + original + "\" into German. If the translation is wrong, explain why.\nAnswer:"
@@ -36,7 +29,7 @@ def adjust_skills(skills, sentence):
       temperature=0.3
     )
     # TODO: Check that skills are adjusted correctly
-    return strip(response.choices[0].text)
+    return strip(merge_evaluations(skills, response.choices[0].text))
 
 def one_exercise(skills):
     sentence = generate_exercise(skills);
@@ -51,18 +44,4 @@ def one_exercise(skills):
     skills = adjust_skills(skills, translation)
     return skills
 
-from os.path import exists
-skills = ""
-if exists("./skills.txt"):
-    skills = open("./skills.txt", "r").read()
-else:
-    skills = open("./skills_template.txt", "r").read()
-
-print("Initial evaluation:")
-print(skills)
-while "5" in skills or "4" in skills or "3" in skills or "2" in skills:
-    skills = one_exercise(skills)
-    print("New evaluation:")
-    with open("./skills.txt", "w") as f:
-        f.write(skills)
 
