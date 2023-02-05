@@ -63,7 +63,6 @@ print(skills)
 while "5" in skills or "4" in skills or "3" in skills or "2" in skills:
     skills = one_exercise(skills)
     print("New evaluation:")
-    print(skills)
     with open("./skills.txt", "w") as f:
         f.write(skills)
 
