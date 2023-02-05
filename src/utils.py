@@ -32,3 +32,14 @@ def merge_evaluations(original, new):
         o_parsed[k] = new_parsed[k]
     print("")
     return print_evaluation(o_parsed)
+
+def has_decreases(original, new):
+    o_parsed = parse_evaluation(original)
+    new_parsed = parse_evaluation(new)
+    for k in new_parsed.keys():
+        if k not in o_parsed:
+            continue
+        if int(o_parsed[k]) < int(new_parsed[k]):
+            return True
+    return False
+

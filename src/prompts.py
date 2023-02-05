@@ -1,5 +1,5 @@
 import openai
-from utils import strip, merge_evaluations
+from utils import strip, merge_evaluations, has_decreases
 
 def sentence_is_correct(original, translation):
     prompt = "Say YES if \"" + translation + "\" is a correct translation of \"" + original + "\" into German. If the translation is wrong, explain why.\nAnswer:"
@@ -28,7 +28,7 @@ def adjust_skills(skills, sentence):
       max_tokens=40,
       temperature=0.3
     )
-    return strip(merge_evaluations(skills, response.choices[0].text))
+    return strip(response.choices[0].text)
 
 def one_exercise(skills):
     sentence = generate_exercise(skills);
@@ -36,11 +36,14 @@ def one_exercise(skills):
     print(sentence)
     translation = input("> ")
     is_correct = sentence_is_correct(sentence, translation)
-    if "YES" in is_correct.upper():
+    adjusted_skills = adjust_skills(skills, translation)
+    if "YES" in is_correct.upper() and not has_decreases(skills, adjusted_skills):
         print("Sentence correctly translated. Generating another one.")
+    elif "YES" in is_correct.upper():
+        print("Your sentence was somehow wrong, but the language model did detect why.")
     else:
         print(is_correct)
-    skills = adjust_skills(skills, translation)
+    skills = merge_evaluations(skills, adjusted_skills)
     return skills
 
 
