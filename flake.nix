@@ -17,7 +17,7 @@
         defaultPackage = pkgs.stdenv.mkDerivation {
             name = "tutor";
             version = "0.10";
-            buildInputs = [ mPython ];
+            buildInputs = with pkgs; [ mPython languagetool ];
             src = ./.;
         };
     });

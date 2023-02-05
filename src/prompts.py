@@ -1,31 +1,6 @@
 import openai
 from utils import strip, merge_evaluations, has_decreases
 
-def answer_to_bool(answer):
-    return "YES" in answer.upper() or "JA" in answer.upper()
-
-def sentence_is_correct(original, translation):
-    prompt = "Verify whether the following German sentence is gramatically correct:\nSentence: " + translation + "\nAnswer:"
-    response = openai.Completion.create(
-      model="text-davinci-003",
-      prompt=prompt,
-      temperature=0.1,
-      max_tokens=100
-    )
-    answer = strip(response.choices[0].text)
-    if not answer_to_bool(answer):
-        return answer
-
-
-    prompt2 = "Is \"" + translation + "\" a correct translation of \"" + original + "\" into German?"
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=prompt2,
-        temperature=0,
-        max_tokens=100)
-    return strip(response.choices[0].text)
-
-
 def generate_generic_exercise():
     response = openai.Completion.create(
       model="text-davinci-003",

@@ -1,13 +1,17 @@
 from prompts import *
+from is_correct import answer_to_bool, sentence_is_correct
 
 class MistakenSentence:
     def __init__(self, original, translation):
         self.original = original
         self.translation = translation
-        self.goodness = 2
+        self.goodness = 8
 
     def generate_exercise(self):
         return self.original
+
+    def __str__(self):
+        return "Sentence \"" + self.original + "\" with ease " + str(self.goodness)
 
 
 class GrammarStructure:
@@ -23,6 +27,7 @@ class System:
     def __init__(self):
         self.iteration = 1
         self.schedule = {}
+        self.languagetool = False
 
 
     def add_to_schedule(self, obj):
@@ -39,7 +44,7 @@ class System:
             print("Translate the following sentence into German:")
             print(sentence)
             translation = input("> ")
-            is_correct = sentence_is_correct(sentence, translation)
+            is_correct = sentence_is_correct(sentence, translation, languagetool=self.languagetool)
             if answer_to_bool(is_correct):
                 print("Sentence correctly translated! Good job!")
                 obj.goodness *= 2
@@ -52,7 +57,7 @@ class System:
             print("Translate the following sentence into German:")
             print(sentence)
             translation = input("> ")
-            is_correct = sentence_is_correct(sentence, translation)
+            is_correct = sentence_is_correct(sentence, translation, languagetool=self.languagetool)
             if answer_to_bool(is_correct):
                 print("Sentence correctly translated! Good Job!")
             else:
