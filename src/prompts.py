@@ -24,11 +24,10 @@ def generate_exercise(skills):
 def adjust_skills(skills, sentence):
     response = openai.Completion.create(
       model="text-davinci-003",
-      prompt="This is the evaluation of a German learner's grammar abillities, from a scale from 1 to 5, 1 being best and 5 being worst. Adjust the scores based on a sentence the user has just translated. If you do not know a user's abillities in a specific category, leave it unchanged.\nBegin evaluation: " + skills + "\nBegin sentence:\n" + sentence + "\nBegin new evaluation:\n",
-      max_tokens=len(skills)+10,
+      prompt="This is the evaluation of a German learner's grammar abillities, from a scale from 1 to 5, 1 being best and 5 being worst. Print new scores for 3 of these categories.\nBegin evaluation: " + skills + "\nBegin sentence:\n" + sentence + "\nBegin changed scores:\n",
+      max_tokens=40,
       temperature=0.3
     )
-    # TODO: Check that skills are adjusted correctly
     return strip(merge_evaluations(skills, response.choices[0].text))
 
 def one_exercise(skills):

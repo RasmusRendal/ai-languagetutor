@@ -25,6 +25,8 @@ def merge_evaluations(original, new):
     new_parsed = parse_evaluation(new)
     print("")
     for k in o_parsed.keys():
+        if k not in new_parsed:
+            continue
         if o_parsed[k] != new_parsed[k]:
             print(k + " changed from " + o_parsed[k] + " to " + new_parsed[k])
         o_parsed[k] = new_parsed[k]
